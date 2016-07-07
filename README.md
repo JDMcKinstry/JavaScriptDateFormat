@@ -57,7 +57,7 @@ Basic example: `new Date().format('m-d-Y h:i:s');` will return something like: `
 	'T'	Timezone abbreviation
 	'Z'	Timezone offset in seconds. The offset for timezones west of UTC is always negative, and for those east of UTC is always positive.
 	'Full Date/Time'	---
-	'c'	ISO 8601 date (added in PHP 5)
+	'c'	ISO 8601 date
 	'r'	» RFC 2822 formatted date
 	'U'	Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)
 
