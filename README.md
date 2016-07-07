@@ -5,6 +5,10 @@ PHP like Date Formatter in 2 flavors
 
 Basic example: `new Date().format('m-d-Y h:i:s');` will return something like: `07-06-2016 06:38:34`
 
+## Quick Links
+ - [Date.format.min.js](https://cdn.rawgit.com/JDMcKinstry/JavaScriptDateFormat/master/Date.format.min.js)
+ - [dateFormat.min.js](https://cdn.rawgit.com/JDMcKinstry/JavaScriptDateFormat/master/dateFormat.min.js)
+
 ## Basic Format Characters:
 
 ### Day
