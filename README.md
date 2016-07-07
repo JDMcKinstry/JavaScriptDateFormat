@@ -24,7 +24,8 @@ Basic example: `new Date().format('m-d-Y h:i:s');` will return something like: `
 ### Week
 ---
 	'W'	ISO-8601 week number of year, weeks starting on Monday
-	'Month'	---
+### Month
+---
 	'F'	A full textual representation of a month, such as January or March
 	'm'	Numeric representation of a month, with leading zeros
 	'M'	A short textual representation of a month, three letters
