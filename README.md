@@ -34,7 +34,7 @@ Basic example: `new Date().format('m-d-Y h:i:s');` will return something like: `
 ### Year
 ---
 	'L'	Whether it's a leap year
-	'o'	ISO-8601 year number. This has the same value as Y, except that if the ISO week number (W) belongs to the previous or next year, that year
+	'o'	ISO-8601 year number
 	'Y'	A full numeric representation of a year, 4 digits
 	'y'	A two digit representation of a year
 ### Time
@@ -56,8 +56,9 @@ Basic example: `new Date().format('m-d-Y h:i:s');` will return something like: `
 	'O'	Difference to Greenwich time (GMT) in hours
 	'P'	Difference to Greenwich time (GMT) with colon between hours and minutes
 	'T'	Timezone abbreviation
-	'Z'	Timezone offset in seconds. The offset for timezones west of UTC is always negative, and for those east of UTC is always positive.
-	'Full Date/Time'	---
+	'Z'	Timezone offset in seconds
+### Full Date/Time
+---
 	'c'	ISO 8601 date
 	'r'	» RFC 2822 formatted date
 	'U'	Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)
