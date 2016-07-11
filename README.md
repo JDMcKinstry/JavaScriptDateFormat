@@ -80,5 +80,7 @@ Pretty |  |
 'pretty-d' | 'n/d/Y'
 'pretty-e' | 'F jS - g:ia'
 'pretty-f' | 'g:iA'
+'pretty-g' | 'F jS, Y'
+'pretty-h' | 'F jS, Y g:mA'
 
 ***TIP***: As you may have noticed, use double `\` to escape a character.
