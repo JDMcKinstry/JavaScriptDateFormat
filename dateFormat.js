@@ -8,61 +8,54 @@ function dateFormat(dt, str, showFormatted) {
 	}
 	var formats = {
 			/*	DAY	*/
-			'd': function() { var a = dt.getDate(); return a > 9 ? a : '0' + a; },
-			'D': function() { return getDayName(dt, true); },
-			'j': function() { return dt.getDate(); },
-			'l': function() { return getDayName(dt); },
-			'N': function() { return dt.getDay() + 1; },
-			'S': function() {
-				var suffixes = [ 'st', 'nd', 'rd', 'th' ],
-					a = dt.getDate()
-				if (a == 1 || a == 21 || a ==31) return "st";
-				else if (a == 2 || a == 22) return "nd";
-				else if (a == 3 || a == 23) return "rd";
-				return "th";
-			},
-			'w': function() { return dt.getDay(); },
-			'z': function() { return Math.round(Math.abs((dt.getTime() - new Date('1/1/' + dt.getFullYear()).getTime())/(8.64e7))); },
+			'd': function() { var a = this.getDate(); return a > 9 ? a : '0' + a; },
+			'D': function() { return getDayName(this, true); },
+			'j': function() { return this.getDate(); },
+			'l': function() { return getDayName(this); },
+			'N': function() { return this.getDay() + 1; },
+			'S': function() { var a = this.getDate(); if (/1/.test(parseInt((a + "").charAt(0)))) return "th"; a = parseInt((a + "").charAt(1)); return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th" },
+			'w': function() { return this.getDay(); },
+			'z': function() { return Math.round(Math.abs((this.getTime() - new Date('1/1/' + this.getFullYear()).getTime())/(8.64e7))); },
 			/*	WEEK	*/
-			'W': function() { return getWeek(dt); },
+			'W': function() { return getWeek(this); },
 			/*	MONTH	*/
-			'F': function() { return getMonthName(dt); },
-			'm': function() { var a = dt.getMonth() + 1; return a > 9 ? a : '0' + a; },
-			'M': function() { return getMonthName(dt, true); },
-			'n': function() { return dt.getMonth() + 1; },
-			't': function() { return new Date(dt.getFullYear(), dt.getMonth()+1, 0).getDate(); },
+			'F': function() { return getMonthName(this); },
+			'm': function() { var a = this.getMonth() + 1; return a > 9 ? a : '0' + a; },
+			'M': function() { return getMonthName(this, true); },
+			'n': function() { return this.getMonth() + 1; },
+			't': function() { return new Date(this.getFullYear(), this.getMonth()+1, 0).getDate() },
 			/*	YEAR	*/
-			'L': function() { var a = dt.getFullYear(); return 0 == a % 4 && 0 != a % 100 || 0 == a % 400; },
-			'o': function() { return parseInt(dt.getFullYear()); },	//	todo: base on week's parent year
-			'Y': function() { return parseInt(dt.getFullYear()); },
-			'y': function() { return parseInt((dt.getFullYear()+'').substr(-2)); },
+			'L': function() { var a = this.getFullYear(); return 0 == a % 4 && 0 != a % 100 || 0 == a % 400; },
+			'o': function() { return parseInt(this.getFullYear()); },	//	todo: base on week's parent year
+			'Y': function() { return parseInt(this.getFullYear()); },
+			'y': function() { return parseInt((this.getFullYear()+'').substr(-2)); },
 			/*	TIME	*/
-			'a': function() { return dt.getHours() >= 12 ? "pm" : "am"; },
-			'A': function() { return dt.getHours() >= 12 ? "PM" : "AM"; },
-			'B': function() { return "@"+("00"+Math.floor((((dt.getHours()+1)%24*60+dt.getMinutes())*60+dt.getSeconds()+(dt.getMilliseconds()*0.001))/86.4)).slice(-3); },
-			'g': function() { var a = dt.getHours(); return a <= 12 ? a : a - 12; },	//	12-hour format of an hour without leading zeros
-			'G': function() { return dt.getHours(); },	//	24-hour format of an hour without leading zeros
-			'h': function() { var a = dt.getHours(); a = a <= 12 ? a : a - 12; return a > 9 ? a : '0' + a; },	//		12-hour format of an hour with leading zeros
-			'H': function() { var a = dt.getHours(); return a > 9 ? a : '0' + a; },	//		24-hour format of an hour with leading zeros
-			'i': function() { var a = dt.getMinutes(); return a > 9 ? a : '0' + a; },	//	Minutes with leading zeros
-			's': function() { var a = dt.getSeconds(); return a > 9 ? a : '0' + a; },	//	Seconds, with leading zeros
-			'u': function() { return dt.getMilliseconds(); },	//	this is NOT microseconds ... it's JS :P,
+			'a': function() { return this.getHours() >= 12 ? "pm" : "am"; },
+			'A': function() { return this.getHours() >= 12 ? "PM" : "AM"; },
+			'B': function() { return "@"+("00"+Math.floor((((this.getHours()+1)%24*60+this.getMinutes())*60+this.getSeconds()+(this.getMilliseconds()*0.001))/86.4)).slice(-3); },
+			'g': function() { var a = this.getHours(); return a == 0 ? 12 : a <= 12 ? a : a - 12; },	//	12-hour format of an hour without leading zeros
+			'G': function() { return this.getHours(); },	//	24-hour format of an hour without leading zeros
+			'h': function() { var a = this.getHours(); a = a <= 12 ? a : a - 12; return a == 0 ? 12 : a > 9 ? a : '0' + a; },	//		12-hour format of an hour with leading zeros
+			'H': function() { var a = this.getHours(); return a > 9 ? a : '0' + a; },	//		24-hour format of an hour with leading zeros
+			'i': function() { var a = this.getMinutes(); return a > 9 ? a : '0' + a; },	//	Minutes with leading zeros
+			's': function() { var a = this.getSeconds(); return a > 9 ? a : '0' + a; },	//	Seconds, with leading zeros
+			'u': function() { return this.getMilliseconds(); },	//	this is NOT microseconds ... it's JS :P,
 			/*	TIMEZONE	*/
-			'e': function() { var a = dt.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/); return a.length > 1 ? a[1] : ''; },
+			'e': function() { var a = this.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/); return a.length > 1 ? a[1] : ''; },
 			'I': function() {
-				var a = new Date(dt.getFullYear(), 0, 1),
-					b = new Date(dt.getFullYear(), 6, 1),
+				var a = new Date(this.getFullYear(), 0, 1),
+					b = new Date(this.getFullYear(), 6, 1),
 					c = Math.max(a.getTimezoneOffset(), b.getTimezoneOffset());
-				return dt.getTimezoneOffset() < c ? 1 : 0;
+				return this.getTimezoneOffset() < c ? 1 : 0;
 			},
-			'O': function() { var a = dt.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/); return a.length > 2 ? a[2] : ''; },
-			'P': function() { var a = dt.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/); return a.length > 2 ? a[2].substr(0,3) + ':' + a[2].substr(3,2) : ''; },
-			'T': function() { return dt.toLocaleString('en', {timeZoneName:'short'}).split(' ').pop(); },	//	may not be reliable on Apple Systems	//	NOTE: Apple Sux
-			'Z': function() { return dt.getTimezoneOffset() * 60; },
+			'O': function() { var a = this.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/); return a.length > 2 ? a[2] : ''; },
+			'P': function() { var a = this.toString().match(/ ([A-Z]{3,4})([-|+]?\d{4})/); return a.length > 2 ? a[2].substr(0,3) + ':' + a[2].substr(3,2) : ''; },
+			'T': function() { return this.toLocaleString('en', {timeZoneName:'short'}).split(' ').pop(); },	//	may not be reliable on Apple Systems	//	NOTE: Apple Sux
+			'Z': function() { return this.getTimezoneOffset() * 60; },
 			/*	FULL DATE/TIME	*/
-			'c': function() { return addHours(new Date(dt), -(dt.getTimezoneOffset() / 60)).toISOString(); },
-			'r': function() { return addHours(new Date(dt), -(dt.getTimezoneOffset() / 60)).toISOString(); },
-			'U': function() { return dt.getTime() / 1000 | 0; }
+			'c': function() { return addHours(new Date(this), -(this.getTimezoneOffset() / 60)).toISOString(); },
+			'r': function() { return addHours(new Date(this), -(this.getTimezoneOffset() / 60)).toISOString(); },
+			'U': function() { return this.getTime() / 1000 | 0; }
 		},
 		compound = {
 			'commonLogFormat': 'd/M/Y:G:i:s',
@@ -108,6 +101,8 @@ function dateFormat(dt, str, showFormatted) {
 			'pretty-d': 'n/d/Y',
 			'pretty-e': 'F jS - g:ia',
 			'pretty-f': 'g:iA',
+			'pretty-g': 'F jS, Y',
+			'pretty-h': 'F jS, Y g:mA'
 		}
 	if (str) {
 		if (str == 'compound') {

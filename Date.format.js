@@ -13,14 +13,7 @@
 			'j': function() { return this.getDate(); },
 			'l': function() { return getDayName(this); },
 			'N': function() { return this.getDay() + 1; },
-			'S': function() {
-				var suffixes = [ 'st', 'nd', 'rd', 'th' ],
-					a = this.getDate()
-				if (a == 1 || a == 21 || a ==31) return "st";
-				else if (a == 2 || a == 22) return "nd";
-				else if (a == 3 || a == 23) return "rd";
-				return "th";
-			},
+			'S': function() { var a = this.getDate(); if (/1/.test(parseInt((a + "").charAt(0)))) return "th"; a = parseInt((a + "").charAt(1)); return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th" },
 			'w': function() { return this.getDay(); },
 			'z': function() { return Math.round(Math.abs((this.getTime() - new Date('1/1/' + this.getFullYear()).getTime())/(8.64e7))); },
 			/*	WEEK	*/
@@ -40,9 +33,9 @@
 			'a': function() { return this.getHours() >= 12 ? "pm" : "am"; },
 			'A': function() { return this.getHours() >= 12 ? "PM" : "AM"; },
 			'B': function() { return "@"+("00"+Math.floor((((this.getHours()+1)%24*60+this.getMinutes())*60+this.getSeconds()+(this.getMilliseconds()*0.001))/86.4)).slice(-3); },
-			'g': function() { var a = this.getHours(); return a <= 12 ? a : a - 12; },	//	12-hour format of an hour without leading zeros
+			'g': function() { var a = this.getHours(); return a == 0 ? 12 : a <= 12 ? a : a - 12; },	//	12-hour format of an hour without leading zeros
 			'G': function() { return this.getHours(); },	//	24-hour format of an hour without leading zeros
-			'h': function() { var a = this.getHours(); a = a <= 12 ? a : a - 12; return a > 9 ? a : '0' + a; },	//		12-hour format of an hour with leading zeros
+			'h': function() { var a = this.getHours(); a = a <= 12 ? a : a - 12; return a == 0 ? 12 : a > 9 ? a : '0' + a; },	//		12-hour format of an hour with leading zeros
 			'H': function() { var a = this.getHours(); return a > 9 ? a : '0' + a; },	//		24-hour format of an hour with leading zeros
 			'i': function() { var a = this.getMinutes(); return a > 9 ? a : '0' + a; },	//	Minutes with leading zeros
 			's': function() { var a = this.getSeconds(); return a > 9 ? a : '0' + a; },	//	Seconds, with leading zeros
@@ -108,6 +101,8 @@
 			'pretty-d': 'n/d/Y',
 			'pretty-e': 'F jS - g:ia',
 			'pretty-f': 'g:iA',
+			'pretty-g': 'F jS, Y',
+			'pretty-h': 'F jS, Y g:mA'
 		}
 	
 	//	utc param currently does nothing except bool false to return list of constants as pure strings (no format)
