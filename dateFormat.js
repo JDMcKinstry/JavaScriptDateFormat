@@ -134,7 +134,7 @@ function dateFormat(dt, str, showFormatted) {
 			var c = ret[x];
 			if ((c && /[a-z]/i.test(c)) && !(/\\/.test(lc + c))) {
 				var rx = new RegExp(c, 'g');
-				ret[x] = formats[c] ? formats[c].apply(this) : c;
+				ret[x] = formats[c] ? formats[c].apply(dt) : c;
 			}
 			lc = ret[x];
 		}
