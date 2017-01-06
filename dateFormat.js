@@ -13,7 +13,7 @@ function dateFormat(dt, str, showFormatted) {
 			'j': function() { return this.getDate(); },
 			'l': function() { return getDayName(this); },
 			'N': function() { return this.getDay() + 1; },
-			'S': function() { var a = this.getDate(); if (/1/.test(parseInt((a + "").charAt(0)))) return "th"; a = parseInt((a + "").charAt(1)); return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th" },
+			'S': function() { var a = this.getDate(); return /^1[0-9]$/.test(a) ? "th" : /1$/.test(a) ? "st" : /2$/.test(a) ? "nd" : /3$/.test(a) ? "rd" : "th"; },
 			'w': function() { return this.getDay(); },
 			'z': function() { return Math.round(Math.abs((this.getTime() - new Date('1/1/' + this.getFullYear()).getTime())/(8.64e7))); },
 			/*	WEEK	*/
